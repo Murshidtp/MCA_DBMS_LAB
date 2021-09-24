@@ -1,0 +1,44 @@
+EXPERIMENT NO : 4
+
+
+Data retrieval from the already created database/ Create new sample database and necessary adding of data are made then perform the query selections. 
+
+
+select  distinct first_name,reg_no,DOB from student;
++------------+--------+------------+
+| first_name | reg_no | DOB        |
++------------+--------+------------+
+| Steve      | A11    | 1995-04-12 |
+| David      | A12    | 1994-04-18 |
+| Sarah      | A13    | 1996-01-18 |
+| James      | A14    | 1996-12-09 |
+| Adam       | A15    | 1997-11-09 |
++------------+--------+------------+
+
+select Reg_No from Student_Mark where Student_Internal > 40;
++--------+
+| Reg_No |
++--------+
+| CEV003 |
+| CEV004 |
+| CEV005 |
++--------+
+
+select Reg_No from Student_Mark where Student_Internal < 40;
++--------+
+| Reg_No |
++--------+
+| CEV001 |
+| CEV002 |
+| CEV006 |
++--------+
+
+select reg_no,first_name,DOB from student where DOB >= "1996-01-01";
++--------+------------+------------+
+| reg_no | first_name | DOB        |
++--------+------------+------------+
+| A13    | Sarah      | 1996-01-18 |
+| A14    | James      | 1996-12-09 |
+| A15    | Adam       | 1997-11-09 |
++--------+------------+------------+
+

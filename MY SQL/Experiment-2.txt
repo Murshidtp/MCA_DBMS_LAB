@@ -1,0 +1,85 @@
+
+EXPERIMENT NO : 2
+(03-08-2021)
+
+Perform insertion of records into the database created in the first experiment.
+Alter the created table and Perform the Insertion, Updation and Deletion operation.
+Drop the created table and remake it.
+
+
+INSERT INTO Program VALUES('p1','MCA','2 year',60,'Regular',4);
+INSERT INTO Program VALUES('p2','MCA','5 year',60,'Integrated',10);
+INSERT INTO Program VALUES('p3','B TECH','4 year',60,'Regular',8);
+INSERT INTO Program VALUES('p4','BSC','3 year',50,'Regular',6);
+
+SELECT * FROM Program;
+
++------------+--------------+----------+-------------+--------------+--------------+
+| program_id | program_name | Duration | st_strength | program_type | no_semesters |
++------------+--------------+----------+-------------+--------------+--------------+
+| p1         | MCA          | 2 year   |          60 | Regular      |            4 |
+| p2         | MCA          | 5 year   |          60 | Integrated   |           10 |
+| p3         | B TECH       | 4 year   |          60 | Regular      |            8 |
+| p4         | BSC          | 3 year   |          50 | Regular      |            6 |
++------------+--------------+----------+-------------+--------------+--------------+
+
+
+
+
+INSERT INTO Student VALUES('Steve','Smith','A11','p2','1995-04-12','male','2020');
+INSERT INTO Student VALUES('David','Warner','A12','p1','1994-04-18','male','2020');
+INSERT INTO Student VALUES('Sarah','','A13','p3','1996-01-18','female','2019');
+INSERT INTO Student VALUES('James','','A14','p4','1996-12-09','male','2019');
+INSERT INTO Student VALUES('Adam','Jhon','A15','p2','1997-11-09','male','2018');
+
+SELECT * FROM Student;
+
++------------+-----------+--------+------------+------------+--------+----------------+
+| first_name | last_name | reg_no | program_id | DOB        | sex    | year_admission |
++------------+-----------+--------+------------+------------+--------+----------------+
+| Steve      | Smith     | A11    | p2         | 1995-04-12 | male   |           2020 |
+| David      | Warner    | A12    | p1         | 1994-04-18 | male   |           2020 |
+| Sarah      |           | A13    | p3         | 1996-01-18 | female |           2019 |
+| James      |           | A14    | p4         | 1996-12-09 | male   |           2019 |
+| Adam       | Jhon      | A15    | p2         | 1997-11-09 | male   |           2018 |
++------------+-----------+--------+------------+------------+--------+----------------+
+
+ALTER TABLE program ADD college_name VARCHAR(50);
+
+SELECT * FROM program;
++------------+--------------+----------+-------------+--------------+--------------+--------------+
+| program_id | program_name | Duration | st_strength | program_type | no_semesters | college_name |
++------------+--------------+----------+-------------+--------------+--------------+--------------+
+| p1         | MCA          | 2 year   |          60 | Regular      |            4 | NULL         |
+| p2         | MCA          | 5 year   |          60 | Integrated   |           10 | NULL         |
+| p3         | B TECH       | 4 year   |          60 | Regular      |            8 | NULL         |
+| p4         | BSC          | 3 year   |          50 | Regular      |            6 | NULL         |
++------------+--------------+----------+-------------+--------------+--------------+--------------+
+
+UPDATE program SET college_name='CEV' WHERE program_id='p1';
+UPDATE program SET college_name='MES' WHERE program_id='p2';
+
+SELECT * FROM program;
++------------+--------------+----------+-------------+--------------+--------------+--------------+
+| program_id | program_name | Duration | st_strength | program_type | no_semesters | college_name |
++------------+--------------+----------+-------------+--------------+--------------+--------------+
+| p1         | MCA          | 2 year   |          60 | Regular      |            4 | CEV          |
+| p2         | MCA          | 5 year   |          60 | Integrated   |           10 | MES          |
+| p3         | B TECH       | 4 year   |          60 | Regular      |            8 | NULL         |
+| p4         | BSC          | 3 year   |          50 | Regular      |            6 | NULL         |
++------------+--------------+----------+-------------+--------------+--------------+--------------+
+
+
+
+
+ALTER TABLE program DROP college_name;
+
+SELECT * FROM program;
++------------+--------------+----------+-------------+--------------+--------------+
+| program_id | program_name | Duration | st_strength | program_type | no_semesters |
++------------+--------------+----------+-------------+--------------+--------------+
+| p1         | MCA          | 2 year   |          60 | Regular      |            4 |
+| p2         | MCA          | 5 year   |          60 | Integrated   |           10 |
+| p3         | B TECH       | 4 year   |          60 | Regular      |            8 |
+| p4         | BSC          | 3 year   |          50 | Regular      |            6 |
++------------+--------------+----------+-------------+--------------+--------------+

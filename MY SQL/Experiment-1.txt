@@ -1,0 +1,52 @@
+EXPERIMENT NO : 1
+(22-6-2021)
+
+Create database for the schemas 
+    1) Program (Program_ID, Program_Name, Duration, St_Strength, Program_Type, No_Semesters)
+    2) Student ( First_Name, Last_Name, Reg_no, Program_ID, DOB,Sex, Year_Admission)
+
+CREATE TABLE Program(
+program_id VARCHAR(5) PRIMARY KEY,
+program_name VARCHAR(20) NOT NULL,
+Duration VARCHAR(10),
+st_strength INT NOT NULL,
+program_type VARCHAR(20) NOT NULL,
+no_semesters INT NOT NULL
+);
+
+ desc Program;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| program_id   | varchar(5)  | NO   | PRI | NULL    |       |
+| program_name | varchar(20) | NO   |     | NULL    |       |
+| Duration     | varchar(10) | YES  |     | NULL    |       |
+| st_strength  | int         | NO   |     | NULL    |       |
+| program_type | varchar(20) | NO   |     | NULL    |       |
+| no_semesters | int         | NO   |     | NULL    |       |
+| college_name | varchar(50) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+
+CREATE TABLE Student(
+first_name VARCHAR(20) NOT NULL,
+last_name VARCHAR(20),
+reg_no VARCHAR(20) UNIQUE NOT NULL,
+program_id VARCHAR(5),
+DOB DATE,
+sex VARCHAR(5),
+year_admission YEAR NOT NULL,
+FOREIGN KEY(program_id) REFERENCES program(program_id)
+);
+
+desc Student;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| first_name     | varchar(20) | NO   |     | NULL    |       |
+| last_name      | varchar(20) | YES  |     | NULL    |       |
+| reg_no         | varchar(20) | NO   | PRI | NULL    |       |
+| program_id     | varchar(5)  | YES  | MUL | NULL    |       |
+| DOB            | date        | YES  |     | NULL    |       |
+| sex            | varchar(10) | YES  |     | NULL    |       |
+| year_admission | year        | NO   |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+

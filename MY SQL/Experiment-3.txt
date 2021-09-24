@@ -1,0 +1,135 @@
+EXPERIMENT NO : 3
+(10-08-2021)
+
+Create database for the schemas 
+    1) Course(Course_ID, Course_Name, Credit, Semester, Internal_Mark, External_Mark Course_Type)
+    2) Student_Mark(Reg_No, Course_ID, Student_Internal, Student_External)
+After associating these schemas in to the already created database and perform row insertion, deletion and updation.
+
+
+CREATE TABLE Course(
+Course_id VARCHAR(10) PRIMARY KEY,
+Course_Name VARCHAR(30),
+Credit  INT NOT NULL,
+Semester INT,
+Internal_Mark INT NOT NULL,
+External_Mark INT NOT NULL,
+Course_Type VARCHAR(20)
+);
+
+ desc Course;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| Course_id     | varchar(10) | NO   | PRI | NULL    |       |
+| Course_Name   | varchar(30) | YES  |     | NULL    |       |
+| Credit        | int         | NO   |     | NULL    |       |
+| Semester      | int         | YES  |     | NULL    |       |
+| Internal_Mark | int         | NO   |     | NULL    |       |
+| External_Mark | int         | NO   |     | NULL    |       |
+| Course_Type   | varchar(20) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+
+ 
+INSERT INTO Course VALUES('MCA01','Maths',10,1,40,40,'General');
+INSERT INTO Course VALUES('MCA02','Python',10,1,50,50,'Lab');
+INSERT INTO Course VALUES('MCA03','SE',10,1,50,50,'General');
+INSERT INTO Course VALUES('MCA04','OS',5,1,20,50,'Elective');
+INSERT INTO Course VALUES('MCA05','Java',8,2,50,50,'Lab');
+
+select * from Course;
++-----------+-------------+--------+----------+---------------+---------------+-------------+
+| Course_id | Course_Name | Credit | Semester | Internal_Mark | External_Mark | Course_Type |
++-----------+-------------+--------+----------+---------------+---------------+-------------+
+| MCA01     | Maths       |     10 |        1 |            40 |            40 | General     |
+| MCA02     | Python      |     10 |        1 |            50 |            50 | Lab         |
+| MCA03     | SE          |     10 |        1 |            50 |            50 | General     |
+| MCA04     | OS          |      5 |        1 |            20 |            50 | Elective    |
+| MCA05     | Java        |      8 |        2 |            50 |            50 | Lab         |
++-----------+-------------+--------+----------+---------------+---------------+-------------+
+
+
+
+ CREATE TABLE Student_Mark(
+ Reg_No VARCHAR(10) NOT NULL,
+ Course_id VARCHAR(10) NOT NULL,
+ Student_Internal INT NOT NULL,
+ Student_External INT NOT NULL,
+ FOREIGN KEY(Course_id) REFERENCES Course(Course_id)
+ );
+
+desc Student_Mark;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| Reg_No           | varchar(10) | NO   | PRI | NULL    |       |
+| Course_id        | varchar(10) | NO   | MUL | NULL    |       |
+| Student_Internal | int         | NO   |     | NULL    |       |
+| Student_External | int         | NO   |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+
+
+INSERT INTO Student_Mark VALUES('CEV001','MCA01',35,30);
+INSERT INTO Student_Mark VALUES('CEV002','MCA01',32,28);
+INSERT INTO Student_Mark VALUES('CEV003','MCA02',42,39);
+INSERT INTO Student_Mark VALUES('CEV004','MCA02',45,48);
+INSERT INTO Student_Mark VALUES('CEV005','MCA03',45,30);
+INSERT INTO Student_Mark VALUES('CEV006','MCA04',15,30);
+INSERT INTO Student_Mark VALUES('CEV007','MCA05',47,40);
+
+select * from Student_Mark;
++--------+-----------+------------------+------------------+
+| Reg_No | Course_id | Student_Internal | Student_External |
++--------+-----------+------------------+------------------+
+| CEV001 | MCA01     |               35 |               30 |
+| CEV002 | MCA01     |               32 |               28 |
+| CEV003 | MCA02     |               42 |               39 |
+| CEV004 | MCA02     |               45 |               48 |
+| CEV005 | MCA03     |               45 |               30 |
+| CEV006 | MCA04     |               15 |               30 |
+| CEV007 | MCA05     |               47 |               40 |
++--------+-----------+------------------+------------------+
+
+UPDATE Course SET Course_Name='Mathmatics' WHERE Course_id='MCA01';
+UPDATE Course SET External_Mark= 60 WHERE Course_id='MCA01';
+
+ select * from Course;
++-----------+-------------+--------+----------+---------------+---------------+-------------+
+| Course_id | Course_Name | Credit | Semester | Internal_Mark | External_Mark | Course_Type |
++-----------+-------------+--------+----------+---------------+---------------+-------------+
+| MCA01     | Mathmatics  |     10 |        1 |            40 |            60 | General     |
+| MCA02     | Python      |     10 |        1 |            50 |            50 | Lab         |
+| MCA03     | SE          |     10 |        1 |            50 |            50 | General     |
+| MCA04     | OS          |      5 |        1 |            20 |            50 | Elective    |
+| MCA05     | Java        |      8 |        2 |            50 |            50 | Lab         |
++-----------+-------------+--------+----------+---------------+---------------+-------------+
+
+UPDATE Student_Mark SET Student_External= 55 WHERE Course_id='MCA01';
+
+select * from Student_Mark;
++--------+-----------+------------------+------------------+
+| Reg_No | Course_id | Student_Internal | Student_External |
++--------+-----------+------------------+------------------+
+| CEV001 | MCA01     |               35 |               55 |
+| CEV002 | MCA01     |               32 |               55 |
+| CEV003 | MCA02     |               42 |               39 |
+| CEV004 | MCA02     |               45 |               48 |
+| CEV005 | MCA03     |               45 |               30 |
+| CEV006 | MCA04     |               15 |               30 |
+| CEV007 | MCA05     |               47 |               40 |
++--------+-----------+------------------+------------------+
+
+DELETE FROM Student_Mark  WHERE Course_id="MCA05";
+
+select * from Student_Mark;
++--------+-----------+------------------+------------------+
+| Reg_No | Course_id | Student_Internal | Student_External |
++--------+-----------+------------------+------------------+
+| CEV001 | MCA01     |               35 |               55 |
+| CEV002 | MCA01     |               32 |               55 |
+| CEV003 | MCA02     |               42 |               39 |
+| CEV004 | MCA02     |               45 |               48 |
+| CEV005 | MCA03     |               45 |               30 |
+| CEV006 | MCA04     |               15 |               30 |
++--------+-----------+------------------+------------------+
+
